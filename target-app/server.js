@@ -1,4 +1,3 @@
-// server.js
 const express = require('express');
 const app = express();
 require('dotenv').config();
@@ -11,6 +10,12 @@ app.get('/health', (req, res) => {
 
 const authRoutes = require('./routes/auth');
 app.use('/api/auth', authRoutes);
+
+const notesRoutes = require('./routes/notes');
+app.use('/api/notes', notesRoutes);
+
+const filesRoutes = require('./routes/files');
+app.use('/api/files', filesRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
