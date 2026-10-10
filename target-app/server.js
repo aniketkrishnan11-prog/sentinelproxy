@@ -1,8 +1,10 @@
 const express = require('express');
 const app = express();
 require('dotenv').config();
+const path = require('path');
 
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/health', (req, res) => {
   res.json({ status: 'ok' });
@@ -16,10 +18,9 @@ app.use('/api/notes', notesRoutes);
 
 const filesRoutes = require('./routes/files');
 app.use('/api/files', filesRoutes);
+
 const adminRoutes = require('./routes/admin');
 app.use('/api/admin', adminRoutes);
-
-
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
