@@ -6,6 +6,9 @@ const path = require('path');
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
+const detectionMiddleware = require('./detection/middleware');
+app.use(detectionMiddleware);
+
 app.get('/health', (req, res) => {
   res.json({ status: 'ok' });
 });
