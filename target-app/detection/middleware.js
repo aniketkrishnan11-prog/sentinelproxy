@@ -19,17 +19,21 @@ function scanValue(value, matches) {
 async function detectionMiddleware(req, res, next) {
   const matches = [];
 
-  // Inspect query params, URL params, and body — every place user input enters
+  // Catch the WAF-bypass case: a POST/PUT/PATCH that should have a
+  // JSON body but doesn't (missing or malformed Content-Type) — don't
+  // silently let it through just because there's nothing to scan.
+  if (['POST', 'PUT', 'PATCH'].includes(req.method) && req.body === undefined) {
+    matches.push({ name: 'Missing/malformed body on write request', technique: 'T1027' });
+  }
+
   scanValue(req.query, matches);
   scanValue(req.params, matches);
   scanValue(req.body, matches);
 
   const sourceIp = req.headers['x-forwarded-for'] || req.ip;
   const verdict = matches.length > 0 ? 'blocked' : 'allowed';
-  const topMatch = matches[0]; // log the first/highest-priority match if multiple
+  const topMatch = matches[0];
 
-  // Log every request's verdict — not just blocked ones — so your
-  // dashboard in Phase 7 can show full traffic, not just attacks
   try {
     await pool.query(
       `INSERT INTO request_logs (source_ip, method, path, payload, verdict, mitre_technique)

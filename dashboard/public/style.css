@@ -1,0 +1,57 @@
+body {
+  font-family: system-ui, sans-serif;
+  background: #0f172a;
+  color: #e2e8f0;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 { color: #f8fafc; }
+
+.stats {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.stat-card {
+  background: #1e293b;
+  padding: 15px 20px;
+  border-radius: 8px;
+  flex: 1;
+}
+
+.stat-card .number {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.stat-card.blocked .number { color: #ef4444; }
+.stat-card.allowed .number { color: #22c55e; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #1e293b;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #334155;
+  font-size: 14px;
+}
+
+th { background: #0f172a; color: #94a3b8; }
+
+.verdict-blocked { color: #ef4444; font-weight: bold; }
+.verdict-allowed { color: #22c55e; }
+
+.technique-tag {
+  background: #334155;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+}

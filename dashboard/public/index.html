@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SentinelProxy SOC Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>SentinelProxy — Live Attack Monitor</h1>
+
+  <div class="stats">
+    <div class="stat-card">
+      <div>Total Requests</div>
+      <div class="number" id="totalCount">-</div>
+    </div>
+    <div class="stat-card blocked">
+      <div>Blocked</div>
+      <div class="number" id="blockedCount">-</div>
+    </div>
+    <div class="stat-card allowed">
+      <div>Allowed</div>
+      <div class="number" id="allowedCount">-</div>
+    </div>
+  </div>
+
+  <h2>Recent Activity</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Time</th>
+        <th>IP</th>
+        <th>Method</th>
+        <th>Path</th>
+        <th>Verdict</th>
+        <th>MITRE Technique</th>
+      </tr>
+    </thead>
+    <tbody id="logsTable"></tbody>
+  </table>
+
+  <script src="app.js"></script>
+</body>
+</html>

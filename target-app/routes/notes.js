@@ -76,4 +76,10 @@ router.get('/:id', requireAuth, async (req, res) => {
   }
 });
 
+
+
+router.post('/', requireAuth, async (req, res) => {
+  const { title, content, is_private } = req.body || {};
+  const user_id = req.user.id;
+});
 module.exports = router;
